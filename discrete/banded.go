@@ -19,12 +19,12 @@ func (b *Banded) StepChange(d float64) bool {
 	b.Step(d)
 	if b.Triggered {
 		if b.Triggering.Threshold.Exceeded(b.Amplitude()) {
-			b.Triggered = Triggered(false)
+			b.Triggered = true
 			return true
 		}
 	} else {
 		if !b.Threshold.Exceeded(b.Amplitude()) {
-			b.Triggered = Triggered(true)
+			b.Triggered = false
 			return true
 		}
 	}
