@@ -6,8 +6,8 @@ type StepChanger interface {
 	StepChange(float64) bool
 }
 
-// wraps any StepChanger to channel the State after any change.
-// uint should be set to identify which StepChanger caused the event.
+// wraps any StepChanger to channel the State after an indicated change.
+// has an Ident (uint) to reference which StepChanger, all transmitting on the same chan) caused the event.
 type Eventing struct {
 	StepChanger
 	Ident   uint

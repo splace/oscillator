@@ -34,6 +34,7 @@ func (s State) Phase() float64 {
 	return cmplx.Phase(complex128(s))
 }
 
+// Steppers are group of Stepper's that together are a Stepper, simultaneously Stepping all contained Stepper's and whose StateGetter returns the sum of all the contained Steppers States.
 type Steppers []Stepper
 
 func (ss Steppers) Step(d float64) {
@@ -49,6 +50,7 @@ func (ss Steppers) StateGetter() (s State) {
 	return
 }
 
+// AvgSteppers wraps a Steppers whose State is the average of the contained Steppers States.
 type AvgSteppers struct {
 	Steppers
 }
