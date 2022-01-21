@@ -1,4 +1,4 @@
-package oscillator
+package discrete
 
 // StepChanger's are Stepper's that return if a step caused an internal State change.
 type StepChanger interface {
@@ -7,7 +7,7 @@ type StepChanger interface {
 }
 
 // wraps any StepChanger to channel the State after an indicated change.
-// has an Ident (uint) to reference which StepChanger, all transmitting on the same chan) caused the event.
+// has an Ident (uint) for identifying StepChanger's on the same chan.
 type Eventing struct {
 	StepChanger
 	Ident   uint

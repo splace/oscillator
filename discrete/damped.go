@@ -1,4 +1,4 @@
-package oscillator
+package discrete
 
 import "math/cmplx"
 import "math"
@@ -11,9 +11,9 @@ type Damped struct {
 
 type Stepping complex128
 
-// build a Damper from discretization, and damping, per cycle.
+// build a Damped from resolution and damping, both per cycle.
 func NewDamped(stepsPerCycle float64, damping float64) *Damped {
-	if !(stepsPerCycle > 0) || damping < 0 || damping > 1 {
+	if !(stepsPerCycle > 0) || damping < 0 || damping > stepsPerCycle {
 		return nil
 	}
 	return &Damped{Stepping: Stepping(cmplx.Rect((1 - damping/stepsPerCycle), math.Pi*2/stepsPerCycle))}

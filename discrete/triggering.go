@@ -1,6 +1,6 @@
-package oscillator
+package discrete
 
-// Triggering's are Damped with amplitude Threshold and are StepChanger's.
+// Triggering's are Damped with an amplitude Threshold used to make them StepChanger's.
 type Triggering struct {
 	*Damped
 	Triggered
@@ -26,12 +26,8 @@ func NewTriggering(o *Damped, t Threshold) *Triggering {
 	return &Triggering{Damped: o, Threshold: t}
 }
 
-func (t *Triggering) Step(d float64) {
-	t.StepChange(d)
-}
-
 func (t *Triggering) StepChange(d float64) bool {
-	t.Damped.Step(d)
+	t.Step(d)
 	if e := Triggered(t.Exceeded(t.Amplitude())); e != t.Triggered {
 		t.Triggered = e
 		return true

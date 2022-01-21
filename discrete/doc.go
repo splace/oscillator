@@ -1,2 +1,2 @@
-// # Discrete Oscillators
-package oscillator
+// # Simulated Oscillators
+package discrete

@@ -1,7 +1,7 @@
-package oscillator
+package discrete
 
 // Neuron's are Triggering oscillators with a Threshold that changes.
-// Threshold changed by different Adjusters whether Triggered or not.
+// Threshold changed by different Adjusters when either Triggered or not.
 type Neuron struct {
 	*Triggering
 	whenTriggered, whenNotTriggered Adjuster
@@ -30,7 +30,7 @@ func (a OffsetGeometric) Adjust(t *Threshold) {
 	(*t) += a.Offset
 }
 
-// makes with same/different Adjusters.
+// makes a Neuron with the same/different Adjusters.
 // returns nil for inappropriate use.
 func NewNeuron(sc float64, damping float64, t Threshold, f float64, fs ...float64) *Neuron {
 	nt := NewTriggering(NewDamped(sc, damping), t)

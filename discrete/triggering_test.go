@@ -1,4 +1,4 @@
-package oscillator
+package discrete
 
 import "fmt"
 

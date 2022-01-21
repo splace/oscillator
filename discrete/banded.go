@@ -1,7 +1,7 @@
-package oscillator
+package discrete
 
-// Banded are Triggering oscillators with an additional Threshold, used for transitions to being not-Triggered.
-// Notice: Triggered not only depends on the State, and the Thresholds, but also on which Threshold was transitioned last. There is Hysteresis.
+// Banded are Triggering oscillators with an additional Threshold, used to separate the value that causes being triggered from the value that causes being untriggered.
+// Notice: Banded Triggered have Hysteresis, their state depends on which Threshold was transitioned last.
 type Banded struct {
 	*Triggering
 	Threshold

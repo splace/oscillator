@@ -1,5 +1,5 @@
 // discrete simulation of oscillators using complex numbers.
-package oscillator
+package discrete
 
 import "math"
 import "math/cmplx"
@@ -59,4 +59,17 @@ func (ass AvgSteppers) StateGetter() State {
 	s := ass.Steppers.StateGetter()
 	s /= State(complex(float64(len(ass.Steppers)), 0))
 	return s
+}
+
+// Fixed are Steppers that always return the same state.
+// (not much use other than when used with other Stepper's, together, inside a Steppers)
+type Fixed struct{
+	State
+}
+
+func (f Fixed) Step(d float64) {
+}
+
+func (f Fixed) StateGetter() State {
+	return f.State
 }
