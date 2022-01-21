@@ -5,17 +5,17 @@ package discrete
 type Stabilising struct {
 	Stepper
 	Triggered
-	IsStateTrigger
+	IsStateTriggering
 }
 
 func NewStabilising(s Stepper, m float64) *Stabilising {
-	return &Stabilising{Stepper: s, IsStateTrigger: WithinMargin(m)}
+	return &Stabilising{Stepper: s, IsStateTriggering: AmplitudeWithin(m)}
 }
 
-type IsStateTrigger func(State) bool
+type IsStateTriggering func(State) bool
 
 // returns a Trigger for when its parameter value changes by less than the presented margin.
-func WithinMargin(margin float64) IsStateTrigger{
+func AmplitudeWithin(margin float64) IsStateTriggering{
 	var lv,dv,v float64
 	return func(s State) bool{
 		v=s.StateGetter().Amplitude()
@@ -29,7 +29,7 @@ func (s Stabilising) StepChange(d float64) bool {
 	if s.Triggered {
 		return false
 	}
-	if s.IsStateTrigger(s.StateGetter()) {
+	if s.IsStateTriggering(s.StateGetter()) {
 		s.Triggered = true
 		return true
 	}
